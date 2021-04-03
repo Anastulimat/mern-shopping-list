@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Container, ListGroup, ListGroupItem, Button} from "reactstrap";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import { v4 as uuidv4 } from 'uuid';
 import {connect} from "react-redux";
 import {getItems, deleteItem} from "../actions/itemActions";
 import PropTypes from 'prop-types';
@@ -23,21 +22,6 @@ class ShoppingList extends Component {
         const {items} = this.props.item;
         return (
             <Container>
-                <Button
-                    color={"dark"}
-                    className={"mt-4 mb-4"}
-                    onClick={() => {
-                        const name = prompt('Enter Item');
-                        if(name) {
-                            this.setState(state => ({
-                                items: [...state.items, {id: uuidv4(), name: name}]
-                            }));
-                        }
-                    }}
-                >
-                    Add item
-                </Button>
-
                 <ListGroup>
                     <TransitionGroup className="shopping-list">
                         {items.map(({id, name}) => (
