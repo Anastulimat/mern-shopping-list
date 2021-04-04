@@ -6,9 +6,6 @@ import {getItems, deleteItem} from "../actions/itemActions";
 import PropTypes from 'prop-types';
 
 class ShoppingList extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.getItems();
