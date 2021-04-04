@@ -37,7 +37,6 @@ class ItemModal extends React.Component {
     onSubmit = (e) => {
         e.preventDefault();
         const newItem = {
-            id: uuidv4(),
             name: this.state.name
         }
 
