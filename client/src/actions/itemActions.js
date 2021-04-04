@@ -5,6 +5,10 @@ import {
     DELETE_ITEM, ITEMS_LOADING
 } from "./types";
 
+/**
+ *
+ * @returns {function(*): void}
+ */
 export const getItems = () => dispatch => {
    dispatch(setItemsLoading());
    axios.get('/api/items')
@@ -15,6 +19,11 @@ export const getItems = () => dispatch => {
        .catch(err => console.log(err));
 }
 
+/**
+ *
+ * @param item
+ * @returns {function(*): void}
+ */
 export const addItem = (item) => dispatch => {
     axios.post('/api/items', item)
         .then(res => dispatch({
@@ -24,6 +33,11 @@ export const addItem = (item) => dispatch => {
         .catch(err => console.log(err));
 }
 
+/**
+ *
+ * @param id
+ * @returns {function(*): void}
+ */
 export const deleteItem = (id) => dispatch =>  {
     axios.delete(`/api/items/${id}`)
         .then(res => dispatch({
@@ -33,6 +47,10 @@ export const deleteItem = (id) => dispatch =>  {
         .catch(err => console.log(err));
 }
 
+/**
+ *
+ * @returns {{type: string}}
+ */
 export const setItemsLoading = () => {
     return {
         type: ITEMS_LOADING,
