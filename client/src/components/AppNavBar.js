@@ -12,6 +12,8 @@ import {
     DropdownMenu,
     DropdownItem,
 } from 'reactstrap';
+import RegisterModal from "./auth/RegisterModal";
+import Logout from "./auth/Logout";
 
 class AppNavBar extends Component {
 
@@ -38,27 +40,11 @@ class AppNavBar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                                <RegisterModal />
                             </NavItem>
-
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    Options
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem>
-                                        Option 1
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        Option 2
-                                    </DropdownItem>
-                                    <DropdownItem divider/>
-                                    <DropdownItem>
-                                        Reset
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-
+                            <NavItem>
+                                <Logout />
+                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>

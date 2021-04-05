@@ -5,11 +5,21 @@ import {
     ITEMS_LOADING,
 } from "../actions/types";
 
+/**
+ *
+ * @type {{loading: boolean, items: []}}
+ */
 const initialState = {
     items: [],
     loading: false,
 }
 
+/**
+ *
+ * @param state
+ * @param action
+ * @returns {{loading: boolean, items}|{loading: boolean, items: *[]}|{loading: boolean, items: []}}
+ */
 export default function (state = initialState, action)
 {
     switch (action.type)

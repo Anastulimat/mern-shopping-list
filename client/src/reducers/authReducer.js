@@ -9,6 +9,10 @@ import {
     REGISTER_FAIL
 } from "../actions/types";
 
+/**
+ *
+ * @type {{isLoading: boolean, isAuthenticated: null, user: null, token: string}}
+ */
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
@@ -16,6 +20,12 @@ const initialState = {
     user: null
 }
 
+/**
+ *
+ * @param state
+ * @param action
+ * @returns {{isLoading: boolean, isAuthenticated: null, user: null, token: string}|{isLoading: boolean, isAuthenticated: boolean, user, token: string}|{isLoading: boolean, isAuthenticated: boolean, user: null, token: null}|(*&{isLoading: boolean, isAuthenticated: boolean, user: null, token: string})}
+ */
 export default function (state = initialState, action)
 {
     switch (action.type)
@@ -37,6 +47,7 @@ export default function (state = initialState, action)
 
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
+            localStorage.setItem('token', action.payload.token);
             return {
                 ...state,
                 ...action.payload,
