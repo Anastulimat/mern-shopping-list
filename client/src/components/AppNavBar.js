@@ -12,7 +12,10 @@ import {
     DropdownMenu,
     DropdownItem,
 } from 'reactstrap';
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 import RegisterModal from "./auth/RegisterModal";
+import LoginModal from "./auth/LoginModal";
 import Logout from "./auth/Logout";
 
 class AppNavBar extends Component {
@@ -24,6 +27,10 @@ class AppNavBar extends Component {
         }
     }
 
+    static propTypes = {
+        auth: PropTypes.object.isRequired
+    }
+
     toggle = () => {
         this.setState( {
             isOpen: !this.state.isOpen,
@@ -32,6 +39,31 @@ class AppNavBar extends Component {
 
 
     render() {
+        const {isAuthenticated, user} = this.props.auth;
+        const authLinks = (
+            <>
+                <NavItem>
+                    <span className="navbar-text mr-3">
+                        <strong>{user && `Welcome ${user.name}`}</strong>
+                    </span>
+                </NavItem>
+                <NavItem>
+                    <Logout />
+                </NavItem>
+            </>
+        );
+
+        const guestLinks = (
+            <>
+                <NavItem>
+                    <RegisterModal />
+                </NavItem>
+                <NavItem>
+                    <LoginModal />
+                </NavItem>
+            </>
+        );
+
         return (
             <div>
                 <Navbar color="dark" dark expand="md">
@@ -39,12 +71,7 @@ class AppNavBar extends Component {
                     <NavbarToggler onClick={() => this.toggle()}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <RegisterModal />
-                            </NavItem>
-                            <NavItem>
-                                <Logout />
-                            </NavItem>
+                            {isAuthenticated ? authLinks : guestLinks}
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -53,4 +80,8 @@ class AppNavBar extends Component {
     }
 }
 
-export default AppNavBar;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(AppNavBar);
